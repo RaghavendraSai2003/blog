@@ -14,7 +14,7 @@ class MaintenanceMiddleware:
 
         # Maintenance mode check
         # Git practice change
-
+        #hello
         if getattr(settings, 'MAINTENANCE_MODE', False):
             return render(request, 'blog/maintenance.html', status=503)
 
