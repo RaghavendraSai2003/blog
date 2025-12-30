@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Writer Dashboard{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/dashboard.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-container">
+
+    <h2>Welcome, {{ user.username }} ✍️</h2>
+    <p class="intro-text">You are logged in as a <strong>Writer</strong>. Create and manage your posts.</p>
+
+    <div class="dashboard-cards">
+
+        <a href="/blog/" class="card">
+            <h3>📚 View All Posts</h3>
+            <p>See posts created by all writers.</p>
+        </a>
+
+        <a href="{% url 'create-post' %}" class="card">
+            <h3>➕ Create New Post</h3>
+            <p>Write and publish a new blog post.</p>
+        </a>
+
+        <a href="{% url 'manage-posts' %}" class="card">
+            <h3>📝 Manage My Posts</h3>
+            <p>Edit or delete your published posts.</p>
+        </a>
+
+        <a href="/blog/saved/" class="card">
+            <h3>🔖 Saved Posts</h3>
+            <p>View posts you bookmarked.</p>
+        </a>
+
+        <a href="/logout/" class="card logout-card">
+            <h3>🚪 Logout</h3>
+            <p>End your session securely.</p>
+        </a>
+
+    </div>
+
+</section>
+{% endblock %}

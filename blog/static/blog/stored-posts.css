@@ -1,0 +1,62 @@
+/* Standard Stored Posts */
+
+#stored-posts {
+  margin-top: var(--spacing-xl);
+}
+
+#stored-posts .post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  padding: 0;
+  list-style: none;
+}
+
+#stored-posts li {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-align: left;
+  border: 1px solid var(--color-border);
+}
+
+#stored-posts li:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+#stored-posts a {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Make the whole card clickable if the link wraps everything */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#stored-posts img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--color-border);
+}
+
+#stored-posts .post-content { /* Assuming stored-post.html uses a container for content similar to others */
+  padding: var(--spacing-lg);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#stored-posts h2, #stored-posts h3 {
+  font-size: 1.25rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-text);
+}
+
+#stored-posts p {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+}

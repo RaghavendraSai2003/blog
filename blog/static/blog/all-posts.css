@@ -1,0 +1,55 @@
+/* Standard All Posts List */
+
+#all-posts {
+  margin-top: var(--spacing-xl);
+}
+
+#all-posts .post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  padding: 0;
+  list-style: none;
+}
+
+#all-posts li {
+  /* Removed card styles to fix double-layer effect */
+  width: 100%;
+}
+
+
+
+#all-posts a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#all-posts img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  /* Removed border-bottom as it's handled by inner card */
+}
+
+#all-posts article {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#all-posts h2, #all-posts h3 {
+  font-size: 1.25rem;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-text);
+}
+
+#all-posts p, #all-posts address, #all-posts time {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-xs);
+    font-style: normal;
+}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Blog
+{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/index.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<section id="latest-posts" class="container">
+  <h2>My Latest Thoughts</h2>
+
+  <ul class="post-list">
+    {% for post in posts %}
+    {% include "blog/includes/post-preview.html" %}
+    {% endfor %}
+  </ul>
+</section>
+
+
+
+
+
+
+{% endblock %}

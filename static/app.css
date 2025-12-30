@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+/* --- Navigation --- */
+#main-navigation {
+  width: 100%;
+  height: 4rem;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 100;
+  border-bottom: 1px solid #eee;
+}
+
+#main-navigation h1 a {
+  text-decoration: none;
+  color: #2c3e50; /* Dark text for brand */
+  font-size: 1.5rem;
+}
+
+#main-navigation nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+#main-navigation nav a,
+#main-navigation nav button {
+  text-decoration: none;
+  color: #555; /* Dark grey links */
+  font-weight: 600;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+#main-navigation nav a:hover,
+#main-navigation nav button:hover,
+#main-navigation nav a.active {
+  color: #000; /* Black on hover */
+}
+
+/* --- Container Utility --- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+/* --- Card Styles --- */
+.card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}

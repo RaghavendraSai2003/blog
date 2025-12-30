@@ -1,0 +1,27 @@
+/* Standard Post Component */
+
+.post {
+  background: var(--color-surface);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.post a {
+  text-decoration: none;
+  color: var(--color-text);
+  display: block;
+  padding: var(--spacing-lg);
+}
+
+.post a:hover {
+  background-color: var(--color-bg); /* Slight background shift on hover */
+  color: var(--color-primary);
+}
+
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}

@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage My Posts{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/dashboard.css' %}">
+<style>
+    .posts-list {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .post-item:last-child {
+        border-bottom: none;
+    }
+
+    .post-info h3 {
+        margin: 0 0 5px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .post-info span {
+        font-size: 14px;
+        color: #777;
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-view {
+        padding: 6px 12px;
+        background: #eee;
+        color: #333;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-view:hover {
+        background: #ddd;
+    }
+
+    .btn-delete {
+        padding: 6px 12px;
+        background: #ffcccc;
+        color: #cc0000;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: 0.2s;
+    }
+
+    .btn-delete:hover {
+        background: #ffaaaa;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #777;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="posts-list">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <h2>📝 Manage My Posts</h2>
+        <a href="{% url 'writer-dashboard' %}" style="text-decoration:none; color:#007bff;">&larr; Back to Dashboard</a>
+    </div>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div style="padding:10px; background:#e6fffa; color:#006644; border-radius:4px; margin-bottom:15px;">{{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if posts %}
+    <!-- STEP 1: Date Filter UI -->
+<div style="display:flex; gap:15px; margin-bottom:20px;">
+
+    <div>
+        <label>From</label><br>
+        <input type="date" id="fromDate">
+    </div>
+
+    <div>
+        <label>To</label><br>
+        <input type="date" id="toDate">
+    </div>
+
+    <div style="align-self:end;">
+        <button id="filterBtn" class="btn-view">Apply</button>
+    </div>
+
+</div>
+
+
+
+    <div>
+        {% for post in posts %}
+        <div class="post-item" data-date="{{ post.date|date:'Y-m-d' }}">
+            <div class="post-info">
+                <h3>{{ post.title }}</h3>
+                <span>{{ post.date|date:"M d, Y" }}</span>
+            </div>
+            <div class="actions">
+                <a href="{% url 'post-detail-page' post.slug %}" class="btn-view" target="_blank">View</a>
+                <form action="{% url 'delete-post' post.slug %}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="empty-state">
+        <h3>No posts yet.</h3>
+        <p>Start writing to see your posts here!</p>
+        <a href="{% url 'create-post' %}" class="btn-view"
+            style="background:#007bff; color:white; margin-top:10px; display:inline-block;">Create Post</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('filterBtn').addEventListener('click', function () {
+
+        const fromValue = document.getElementById('fromDate').value;
+        const toValue = document.getElementById('toDate').value;
+
+        const fromDate = fromValue ? new Date(fromValue) : null;
+        const toDate = toValue ? new Date(toValue) : null;
+
+        const posts = document.querySelectorAll('.post-item');
+
+        posts.forEach(post => {
+            const postDateStr = post.dataset.date;
+            const postDate = new Date(postDateStr);
+
+            let show = true;
+
+            if (fromDate && postDate < fromDate) {
+                show = false;
+            }
+
+            if (toDate && postDate > toDate) {
+                show = false;
+            }
+
+            post.style.display = show ? 'flex' : 'none';
+        });
+    });
+</script>
+
+
+
+{% endblock %}

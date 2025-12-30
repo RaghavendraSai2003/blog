@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/post-detail.css' %}?v=4">
+{% endblock %}
+
+{% block content %}
+<section id="summary">
+    <h2>{{ post.title }}</h2>
+
+    <div>
+        {% for tag in post_tags %}
+        <span class="tag">{{ tag.caption }}</span>
+        {% endfor %}
+    </div>
+    <div id="read-later">
+        <form action="{% url 'read-later' %}" method="POST">
+            {%csrf_token%}
+            <input type="hidden" value="{{post.id}}" name="post_id">
+            <button>Read Later</button>
+        </form>
+    </div>
+
+
+    <article>
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        <address>By
+            <a href="mailto:{{ post.author.email_address }}">
+                {{ post.author }}
+            </a>
+        </address>
+
+        <div>
+            Last updated on <time>{{ post.date|date:"d M Y" }}</time>
+        </div>
+    </article>
+</section>
+
+{% if comment_form.errors %}
+<div id="alert">
+    <h2>Saving the comment failed</h2>
+    <p>Please check the comment form below the post and fix your errors</p>
+</div>
+{% endif %}
+
+<main>
+    {{ post.content|linebreaks }}
+</main>
+
+<section id="comment-form">
+    <h2>Your Comment</h2>
+
+    <div class="form-control">
+        <form id="commentForm" action="{% url 'post-detail-page' post.slug %}" method="POST">
+            {% csrf_token %}
+
+            {% for form_field in comment_form %}
+            <div class="form-control {% if form_field.errors %}invalid{% endif %}">
+                {{ form_field.label_tag }}
+                {{ form_field }}
+                {{ form_field.errors }}
+            </div>
+            {% endfor %}
+
+            <button>Save Comment</button>
+
+            <script>
+                $('#commentForm').on('submit', function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        url: window.location.href,
+                        data: $(this).serialize(),
+                        success: function (data) {
+                            $('#comments ul').prepend(`
+                <li>
+                    <strong>${data.user}</strong>
+                    <p>${data.text}</p>
+                </li>
+            `);
+                            $('#commentForm')[0].reset();
+                        }
+                    });
+                });
+            </script>
+
+
+
+        </form>
+    </div>
+</section>
+
+<section id="comments">
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <strong>{{ comment.user_name }}</strong>
+            <p>{{ comment.text|linebreaks }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock %}

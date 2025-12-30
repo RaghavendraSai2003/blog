@@ -1,0 +1,194 @@
+/* Standard Post Detail */
+
+#summary {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xxl);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#summary h2 {
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+}
+
+#summary article {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xl);
+    align-items: flex-start;
+}
+
+#summary article div {
+    flex: 1;
+}
+
+#summary article img {
+    flex: 0 0 300px;
+    max-width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
+    max-height: 300px; /* Limit height too */
+}
+
+#summary address {
+    font-style: normal;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    margin-top: var(--spacing-sm);
+}
+
+#summary time {
+    display: block;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-top: var(--spacing-xs);
+}
+
+/* Content Area */
+main {
+    background: var(--color-surface);
+    padding: var(--spacing-xxl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+    margin-bottom: var(--spacing-xl);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #334155; /* Slightly softer than pure black */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Read Later Button */
+#read-later {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+#read-later button {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+#read-later button:hover {
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+}
+
+/* Comments Section */
+#comments {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#comments h2 {
+    margin-bottom: var(--spacing-lg);
+}
+
+#comments ul {
+    list-style: none;
+    padding: var(--spacing-md);
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background-color: #f9f9f9;
+}
+
+.comment {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-md) 0;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment strong {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+    font-size: 1.05rem;
+}
+
+.comment p {
+    margin: 0;
+    color: var(--color-secondary);
+}
+
+/* Comment Form */
+#comment-form {
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: #f8fafc; /* Even lighter background */
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    max-width: 800px; /* Prevent it from stretching too wide */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#comment-form h2 {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-control {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-control label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Inputs are handled globally, but we can override if needed */
+
+#comment-form button {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color var(--transition-fast);
+}
+
+#comment-form button:hover {
+    background: var(--color-primary-dark);
+}
+
+@media (max-width: 768px) {
+    #summary article {
+        flex-direction: column;
+    }
+    
+    #summary article img {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
