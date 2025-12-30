@@ -13,6 +13,8 @@ class MaintenanceMiddleware:
             return self.get_response(request)
 
         # Maintenance mode check
+        # Git practice change
+
         if getattr(settings, 'MAINTENANCE_MODE', False):
             return render(request, 'blog/maintenance.html', status=503)
 
