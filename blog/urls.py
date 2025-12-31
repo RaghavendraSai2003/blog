@@ -18,5 +18,6 @@ path("dashboard/reader/", reader_dashboard, name="reader-dashboard"),
     path("myposts/", views.manage_posts, name="manage-posts"),
     path("post/<slug:slug>/delete", views.delete_post, name="delete-post"),
     path('protected/', protected_view, name='protected'),
+    path("posts/", views.AllPostView.as_view(), name="posts-page"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

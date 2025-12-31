@@ -42,6 +42,15 @@ class AllPostView(ListView):
     ordering=["-date"]
     context_object_name="all_posts"
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        username = self.request.GET.get("user")
+
+        if username:
+            queryset = queryset.filter(author__user__username=username)
+
+        return queryset
+
 class SinglePostView(DetailView):
     template_name = "blog/post-detail-page.html"
     model = Post
