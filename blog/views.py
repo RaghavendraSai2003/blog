@@ -248,3 +248,4 @@ def delete_post(request, slug):
 def protected_view(request):
     return Response({"user": request.user.username})
  
+ 

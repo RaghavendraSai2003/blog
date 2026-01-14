@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User   # ✅ IMPORTANT
 from .models import Profile, Author
+from blog.tasks import send_email_task
+
 
 
 from django.contrib.auth.forms import AuthenticationForm
@@ -47,10 +49,15 @@ def register_user(request):
             email=email,
             password=password
         )
+        
 
         # Update Profile (created by signal)
         user.profile.role = role
         user.profile.save()
+        send_email_task.delay(
+    "Welcome to My Blog 🎉",
+    user.username,
+    user.email)
 
         # Create Author profile if Writer
         if role == "writer":
